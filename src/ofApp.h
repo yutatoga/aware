@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxDmx.h"
 
 class ofApp : public ofBaseApp{
     
@@ -31,6 +32,10 @@ public:
     ofParameter<int> channel2;
     ofParameter<bool> enableChannel3;
     ofParameter<int> channel3;
+    ofParameter<bool> enableChannel4;
+    ofParameter<int> channel4;
     ofxButton allChannelsOnButton;
     ofxButton allChannelsOffButton;
+    
+    ofxDmx dmx;
 };
