@@ -5,4 +5,7 @@
 	<Channel_2>127</Channel_2>
 	<Enable_channel_3>0</Enable_channel_3>
 	<Channel_3>127</Channel_3>
+<group/>
+	<Enable_channel_4>0</Enable_channel_4>
+	<Channel_4>127</Channel_4>
 </group>

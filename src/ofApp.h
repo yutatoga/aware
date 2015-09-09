@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxDmx.h"
+#include "ofx3DModelLoader.h"
 
 class ofApp : public ofBaseApp{
     
@@ -24,6 +25,7 @@ public:
     void allChannelsOnButtonPressed();
     void allChannelsOffButtonPressed();
     
+    // gui
     ofxPanel gui;
     bool showGui;
     ofParameter<bool> enableChannel1;
@@ -37,5 +39,9 @@ public:
     ofxButton allChannelsOnButton;
     ofxButton allChannelsOffButton;
     
+    // dmx
     ofxDmx dmx;
+    
+    // 3d model
+    ofx3DModelLoader sakuraModel;
 };

@@ -1,5 +1,11 @@
 #include "ofApp.h"
 
+GLfloat lightOnePosition[] = {40.0, 40, 100.0, 0.0};
+GLfloat lightOneColor[] = {0.99, 0.99, 0.99, 1.0};
+
+GLfloat lightTwoPosition[] = {-40.0, 40, 100.0, 0.0};
+GLfloat lightTwoColor[] = {0.99, 0.99, 0.99, 1.0};
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     // gui
@@ -21,6 +27,32 @@ void ofApp::setup(){
     // dmx
     dmx.connect("tty.usbserial-ENY46L4I"); // use the name
     //dmx.connect(0); // or use a number
+    
+    // 3d model
+    //load the squirrel model - the 3ds and the texture file need to be in the same folder
+    sakuraModel.loadModel("sakura/sakura.3ds", 20);
+    
+    //you can create as many rotations as you want
+    //choose which axis you want it to effect
+    //you can update these rotations later on
+    sakuraModel.setRotation(0, 90, 1, 0, 0);
+    sakuraModel.setRotation(1, 270, 0, 0, 1);
+    sakuraModel.setScale(0.9, 0.9, 0.9);
+    sakuraModel.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0);
+
+    // light
+    glShadeModel (GL_SMOOTH);
+    
+    /* initialize lighting */
+    glLightfv (GL_LIGHT0, GL_POSITION, lightOnePosition);
+    glLightfv (GL_LIGHT0, GL_DIFFUSE, lightOneColor);
+    glEnable (GL_LIGHT0);
+    glLightfv (GL_LIGHT1, GL_POSITION, lightTwoPosition);
+    glLightfv (GL_LIGHT1, GL_DIFFUSE, lightTwoColor);
+    glEnable (GL_LIGHT1);
+    glEnable (GL_LIGHTING);
+    glColorMaterial (GL_FRONT_AND_BACK, GL_DIFFUSE);
+    glEnable (GL_COLOR_MATERIAL);
 }
 
 void ofApp::allChannelsOnButtonPressed(){
@@ -60,11 +92,56 @@ void ofApp::update(){
         dmx.setLevel(4, 0);
     }
     dmx.update();
+    
+    //3d model
+    sakuraModel.setRotation(1, 270 + ofGetElapsedTimef() * 60, 0, 0, 1);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    // 3d model
+    ofEnableDepthTest();
+    
+    //fake back wall
+    ofSetColor(20, 20, 20);
+    glBegin(GL_QUADS);
+    glVertex3f(0.0, ofGetHeight(), -600);
+    glVertex3f(ofGetWidth(), ofGetHeight(), -600);
+    glVertex3f(ofGetWidth(), 0, -600);
+    glVertex3f(0, 0, -600);
+    glEnd();
+    
+    //fake wall
+    ofSetColor(50, 50, 50);
+    glBegin(GL_QUADS);
+    glVertex3f(0.0, ofGetHeight(), 0);
+    glVertex3f(ofGetWidth(), ofGetHeight(), 0);
+    glVertex3f(ofGetWidth(), ofGetHeight(), -600);
+    glVertex3f(0, ofGetHeight(), -600);
+    glEnd();
+    
+    //lets tumble the world with the mouse
+    glPushMatrix();
+    
+    //draw in middle of the screen
+    glTranslatef(ofGetWidth()/2,ofGetHeight()/2,0);
+    //tumble according to mouse
+    glRotatef(-mouseY,1,0,0);
+    glRotatef(mouseX,0,1,0);
+    glTranslatef(-ofGetWidth()/2,-ofGetHeight()/2,0);
+    
+    ofSetColor(255, 255, 255, 255);
+    sakuraModel.draw();
+    
+    glPopMatrix();
+    ofDisableDepthTest();
+    ofSetHexColor(0x000000);
+
+    // gui
     if (showGui) gui.draw();
+
+    // debug
+    ofSetWindowTitle(ofToString(ofGetFrameRate(), 0));
 }
 
 //--------------------------------------------------------------
