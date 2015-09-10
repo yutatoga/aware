@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B28881321B9EA1DE00B0CA87 /* model3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B288812A1B9EA1DE00B0CA87 /* model3DS.cpp */; };
-		B28881331B9EA1DE00B0CA87 /* texture3DS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B288812C1B9EA1DE00B0CA87 /* texture3DS.cpp */; };
-		B28881341B9EA1DE00B0CA87 /* ofx3dModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28881301B9EA1DE00B0CA87 /* ofx3dModelLoader.cpp */; };
+		B28881821BA1098C00B0CA87 /* ofxAssimpAnimation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B288814E1BA1098C00B0CA87 /* ofxAssimpAnimation.cpp */; };
+		B28881831BA1098C00B0CA87 /* ofxAssimpMeshHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28881501BA1098C00B0CA87 /* ofxAssimpMeshHelper.cpp */; };
+		B28881841BA1098C00B0CA87 /* ofxAssimpModelLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28881521BA1098C00B0CA87 /* ofxAssimpModelLoader.cpp */; };
+		B28881851BA1098C00B0CA87 /* ofxAssimpTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28881541BA1098C00B0CA87 /* ofxAssimpTexture.cpp */; };
+		B28881861BA1098C00B0CA87 /* assimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B28881811BA1098C00B0CA87 /* assimp.a */; };
 		B2E287E31B93883000F220B9 /* ofxDmx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E287E11B93883000F220B9 /* ofxDmx.cpp */; };
 		B2E287FA1B938E3600F220B9 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E287E91B938E3600F220B9 /* ofxBaseGui.cpp */; };
 		B2E287FB1B938E3600F220B9 /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E287EB1B938E3600F220B9 /* ofxButton.cpp */; };
@@ -71,14 +73,52 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B288812A1B9EA1DE00B0CA87 /* model3DS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = model3DS.cpp; sourceTree = "<group>"; };
-		B288812B1B9EA1DE00B0CA87 /* model3DS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = model3DS.h; sourceTree = "<group>"; };
-		B288812C1B9EA1DE00B0CA87 /* texture3DS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture3DS.cpp; sourceTree = "<group>"; };
-		B288812D1B9EA1DE00B0CA87 /* texture3DS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture3DS.h; sourceTree = "<group>"; };
-		B288812E1B9EA1DE00B0CA87 /* Vector3DS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vector3DS.h; sourceTree = "<group>"; };
-		B288812F1B9EA1DE00B0CA87 /* ofx3DBaseLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofx3DBaseLoader.h; sourceTree = "<group>"; };
-		B28881301B9EA1DE00B0CA87 /* ofx3dModelLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofx3dModelLoader.cpp; sourceTree = "<group>"; };
-		B28881311B9EA1DE00B0CA87 /* ofx3DModelLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofx3DModelLoader.h; sourceTree = "<group>"; };
+		B288814E1BA1098C00B0CA87 /* ofxAssimpAnimation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAssimpAnimation.cpp; sourceTree = "<group>"; };
+		B288814F1BA1098C00B0CA87 /* ofxAssimpAnimation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAssimpAnimation.h; sourceTree = "<group>"; };
+		B28881501BA1098C00B0CA87 /* ofxAssimpMeshHelper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAssimpMeshHelper.cpp; sourceTree = "<group>"; };
+		B28881511BA1098C00B0CA87 /* ofxAssimpMeshHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAssimpMeshHelper.h; sourceTree = "<group>"; };
+		B28881521BA1098C00B0CA87 /* ofxAssimpModelLoader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAssimpModelLoader.cpp; sourceTree = "<group>"; };
+		B28881531BA1098C00B0CA87 /* ofxAssimpModelLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAssimpModelLoader.h; sourceTree = "<group>"; };
+		B28881541BA1098C00B0CA87 /* ofxAssimpTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxAssimpTexture.cpp; sourceTree = "<group>"; };
+		B28881551BA1098C00B0CA87 /* ofxAssimpTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAssimpTexture.h; sourceTree = "<group>"; };
+		B28881561BA1098C00B0CA87 /* ofxAssimpUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxAssimpUtils.h; sourceTree = "<group>"; };
+		B288815A1BA1098C00B0CA87 /* aiAnim.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiAnim.h; sourceTree = "<group>"; };
+		B288815B1BA1098C00B0CA87 /* aiAssert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiAssert.h; sourceTree = "<group>"; };
+		B288815C1BA1098C00B0CA87 /* aiCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiCamera.h; sourceTree = "<group>"; };
+		B288815D1BA1098C00B0CA87 /* aiColor4D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiColor4D.h; sourceTree = "<group>"; };
+		B288815E1BA1098C00B0CA87 /* aiColor4D.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = aiColor4D.inl; sourceTree = "<group>"; };
+		B288815F1BA1098C00B0CA87 /* aiConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiConfig.h; sourceTree = "<group>"; };
+		B28881601BA1098C00B0CA87 /* aiDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiDefines.h; sourceTree = "<group>"; };
+		B28881611BA1098C00B0CA87 /* aiFileIO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiFileIO.h; sourceTree = "<group>"; };
+		B28881621BA1098C00B0CA87 /* aiLight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiLight.h; sourceTree = "<group>"; };
+		B28881631BA1098C00B0CA87 /* aiMaterial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiMaterial.h; sourceTree = "<group>"; };
+		B28881641BA1098C00B0CA87 /* aiMaterial.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = aiMaterial.inl; sourceTree = "<group>"; };
+		B28881651BA1098C00B0CA87 /* aiMatrix3x3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiMatrix3x3.h; sourceTree = "<group>"; };
+		B28881661BA1098C00B0CA87 /* aiMatrix3x3.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = aiMatrix3x3.inl; sourceTree = "<group>"; };
+		B28881671BA1098C00B0CA87 /* aiMatrix4x4.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiMatrix4x4.h; sourceTree = "<group>"; };
+		B28881681BA1098C00B0CA87 /* aiMatrix4x4.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = aiMatrix4x4.inl; sourceTree = "<group>"; };
+		B28881691BA1098C00B0CA87 /* aiMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiMesh.h; sourceTree = "<group>"; };
+		B288816A1BA1098C00B0CA87 /* aiPostProcess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiPostProcess.h; sourceTree = "<group>"; };
+		B288816B1BA1098C00B0CA87 /* aiQuaternion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiQuaternion.h; sourceTree = "<group>"; };
+		B288816C1BA1098C00B0CA87 /* aiScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiScene.h; sourceTree = "<group>"; };
+		B288816D1BA1098C00B0CA87 /* aiTexture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiTexture.h; sourceTree = "<group>"; };
+		B288816E1BA1098C00B0CA87 /* aiTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiTypes.h; sourceTree = "<group>"; };
+		B288816F1BA1098C00B0CA87 /* aiVector2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiVector2D.h; sourceTree = "<group>"; };
+		B28881701BA1098C00B0CA87 /* aiVector3D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiVector3D.h; sourceTree = "<group>"; };
+		B28881711BA1098C00B0CA87 /* aiVector3D.inl */ = {isa = PBXFileReference; lastKnownFileType = text; path = aiVector3D.inl; sourceTree = "<group>"; };
+		B28881721BA1098C00B0CA87 /* aiVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aiVersion.h; sourceTree = "<group>"; };
+		B28881731BA1098C00B0CA87 /* assimp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = assimp.h; sourceTree = "<group>"; };
+		B28881741BA1098C00B0CA87 /* assimp.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = assimp.hpp; sourceTree = "<group>"; };
+		B28881761BA1098C00B0CA87 /* poppack1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = poppack1.h; sourceTree = "<group>"; };
+		B28881771BA1098C00B0CA87 /* pushpack1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pushpack1.h; sourceTree = "<group>"; };
+		B28881781BA1098C00B0CA87 /* DefaultLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultLogger.h; sourceTree = "<group>"; };
+		B28881791BA1098C00B0CA87 /* IOStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOStream.h; sourceTree = "<group>"; };
+		B288817A1BA1098C00B0CA87 /* IOSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOSystem.h; sourceTree = "<group>"; };
+		B288817B1BA1098C00B0CA87 /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		B288817C1BA1098C00B0CA87 /* LogStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LogStream.h; sourceTree = "<group>"; };
+		B288817D1BA1098C00B0CA87 /* NullLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NullLogger.h; sourceTree = "<group>"; };
+		B288817E1BA1098C00B0CA87 /* ProgressHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgressHandler.h; sourceTree = "<group>"; };
+		B28881811BA1098C00B0CA87 /* assimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = assimp.a; sourceTree = "<group>"; };
 		B2E287E11B93883000F220B9 /* ofxDmx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDmx.cpp; sourceTree = "<group>"; };
 		B2E287E21B93883000F220B9 /* ofxDmx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxDmx.h; sourceTree = "<group>"; };
 		B2E287E91B938E3600F220B9 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
@@ -137,6 +177,7 @@
 				E45BE97D0E8CC7DD009D7055 /* AudioToolbox.framework in Frameworks */,
 				E45BE97F0E8CC7DD009D7055 /* CoreAudio.framework in Frameworks */,
 				E45BE9800E8CC7DD009D7055 /* CoreFoundation.framework in Frameworks */,
+				B28881861BA1098C00B0CA87 /* assimp.a in Frameworks */,
 				E45BE9810E8CC7DD009D7055 /* CoreServices.framework in Frameworks */,
 				E45BE9830E8CC7DD009D7055 /* OpenGL.framework in Frameworks */,
 				E45BE9840E8CC7DD009D7055 /* QuickTime.framework in Frameworks */,
@@ -150,36 +191,115 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B28881271B9EA1DE00B0CA87 /* ofx3DModelLoader */ = {
+		B288814C1BA1098C00B0CA87 /* ofxAssimpModelLoader */ = {
 			isa = PBXGroup;
 			children = (
-				B28881281B9EA1DE00B0CA87 /* src */,
+				B288814D1BA1098C00B0CA87 /* src */,
+				B28881571BA1098C00B0CA87 /* libs */,
 			);
-			name = ofx3DModelLoader;
+			name = ofxAssimpModelLoader;
 			sourceTree = "<group>";
 		};
-		B28881281B9EA1DE00B0CA87 /* src */ = {
+		B288814D1BA1098C00B0CA87 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				B28881291B9EA1DE00B0CA87 /* 3DS */,
-				B288812F1B9EA1DE00B0CA87 /* ofx3DBaseLoader.h */,
-				B28881301B9EA1DE00B0CA87 /* ofx3dModelLoader.cpp */,
-				B28881311B9EA1DE00B0CA87 /* ofx3DModelLoader.h */,
+				B288814E1BA1098C00B0CA87 /* ofxAssimpAnimation.cpp */,
+				B288814F1BA1098C00B0CA87 /* ofxAssimpAnimation.h */,
+				B28881501BA1098C00B0CA87 /* ofxAssimpMeshHelper.cpp */,
+				B28881511BA1098C00B0CA87 /* ofxAssimpMeshHelper.h */,
+				B28881521BA1098C00B0CA87 /* ofxAssimpModelLoader.cpp */,
+				B28881531BA1098C00B0CA87 /* ofxAssimpModelLoader.h */,
+				B28881541BA1098C00B0CA87 /* ofxAssimpTexture.cpp */,
+				B28881551BA1098C00B0CA87 /* ofxAssimpTexture.h */,
+				B28881561BA1098C00B0CA87 /* ofxAssimpUtils.h */,
 			);
 			name = src;
-			path = ../../../addons/ofx3DModelLoader/src;
+			path = ../../../addons/ofxAssimpModelLoader/src;
 			sourceTree = "<group>";
 		};
-		B28881291B9EA1DE00B0CA87 /* 3DS */ = {
+		B28881571BA1098C00B0CA87 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				B288812A1B9EA1DE00B0CA87 /* model3DS.cpp */,
-				B288812B1B9EA1DE00B0CA87 /* model3DS.h */,
-				B288812C1B9EA1DE00B0CA87 /* texture3DS.cpp */,
-				B288812D1B9EA1DE00B0CA87 /* texture3DS.h */,
-				B288812E1B9EA1DE00B0CA87 /* Vector3DS.h */,
+				B28881581BA1098C00B0CA87 /* assimp */,
 			);
-			path = 3DS;
+			name = libs;
+			path = ../../../addons/ofxAssimpModelLoader/libs;
+			sourceTree = "<group>";
+		};
+		B28881581BA1098C00B0CA87 /* assimp */ = {
+			isa = PBXGroup;
+			children = (
+				B28881591BA1098C00B0CA87 /* include */,
+				B288817F1BA1098C00B0CA87 /* lib */,
+			);
+			path = assimp;
+			sourceTree = "<group>";
+		};
+		B28881591BA1098C00B0CA87 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				B288815A1BA1098C00B0CA87 /* aiAnim.h */,
+				B288815B1BA1098C00B0CA87 /* aiAssert.h */,
+				B288815C1BA1098C00B0CA87 /* aiCamera.h */,
+				B288815D1BA1098C00B0CA87 /* aiColor4D.h */,
+				B288815E1BA1098C00B0CA87 /* aiColor4D.inl */,
+				B288815F1BA1098C00B0CA87 /* aiConfig.h */,
+				B28881601BA1098C00B0CA87 /* aiDefines.h */,
+				B28881611BA1098C00B0CA87 /* aiFileIO.h */,
+				B28881621BA1098C00B0CA87 /* aiLight.h */,
+				B28881631BA1098C00B0CA87 /* aiMaterial.h */,
+				B28881641BA1098C00B0CA87 /* aiMaterial.inl */,
+				B28881651BA1098C00B0CA87 /* aiMatrix3x3.h */,
+				B28881661BA1098C00B0CA87 /* aiMatrix3x3.inl */,
+				B28881671BA1098C00B0CA87 /* aiMatrix4x4.h */,
+				B28881681BA1098C00B0CA87 /* aiMatrix4x4.inl */,
+				B28881691BA1098C00B0CA87 /* aiMesh.h */,
+				B288816A1BA1098C00B0CA87 /* aiPostProcess.h */,
+				B288816B1BA1098C00B0CA87 /* aiQuaternion.h */,
+				B288816C1BA1098C00B0CA87 /* aiScene.h */,
+				B288816D1BA1098C00B0CA87 /* aiTexture.h */,
+				B288816E1BA1098C00B0CA87 /* aiTypes.h */,
+				B288816F1BA1098C00B0CA87 /* aiVector2D.h */,
+				B28881701BA1098C00B0CA87 /* aiVector3D.h */,
+				B28881711BA1098C00B0CA87 /* aiVector3D.inl */,
+				B28881721BA1098C00B0CA87 /* aiVersion.h */,
+				B28881731BA1098C00B0CA87 /* assimp.h */,
+				B28881741BA1098C00B0CA87 /* assimp.hpp */,
+				B28881751BA1098C00B0CA87 /* Compiler */,
+				B28881781BA1098C00B0CA87 /* DefaultLogger.h */,
+				B28881791BA1098C00B0CA87 /* IOStream.h */,
+				B288817A1BA1098C00B0CA87 /* IOSystem.h */,
+				B288817B1BA1098C00B0CA87 /* Logger.h */,
+				B288817C1BA1098C00B0CA87 /* LogStream.h */,
+				B288817D1BA1098C00B0CA87 /* NullLogger.h */,
+				B288817E1BA1098C00B0CA87 /* ProgressHandler.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		B28881751BA1098C00B0CA87 /* Compiler */ = {
+			isa = PBXGroup;
+			children = (
+				B28881761BA1098C00B0CA87 /* poppack1.h */,
+				B28881771BA1098C00B0CA87 /* pushpack1.h */,
+			);
+			path = Compiler;
+			sourceTree = "<group>";
+		};
+		B288817F1BA1098C00B0CA87 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				B28881801BA1098C00B0CA87 /* osx */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		B28881801BA1098C00B0CA87 /* osx */ = {
+			isa = PBXGroup;
+			children = (
+				B28881811BA1098C00B0CA87 /* assimp.a */,
+			);
+			path = osx;
 			sourceTree = "<group>";
 		};
 		B2E287DF1B93883000F220B9 /* ofxDmx */ = {
@@ -238,7 +358,7 @@
 			children = (
 				B2E287DF1B93883000F220B9 /* ofxDmx */,
 				B2E287E71B938E3600F220B9 /* ofxGui */,
-				B28881271B9EA1DE00B0CA87 /* ofx3DModelLoader */,
+				B288814C1BA1098C00B0CA87 /* ofxAssimpModelLoader */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -408,20 +528,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B28881831BA1098C00B0CA87 /* ofxAssimpMeshHelper.cpp in Sources */,
 				B2E287E31B93883000F220B9 /* ofxDmx.cpp in Sources */,
-				B28881341B9EA1DE00B0CA87 /* ofx3dModelLoader.cpp in Sources */,
+				B28881821BA1098C00B0CA87 /* ofxAssimpAnimation.cpp in Sources */,
 				B2E288011B938E3600F220B9 /* ofxToggle.cpp in Sources */,
-				B28881331B9EA1DE00B0CA87 /* texture3DS.cpp in Sources */,
 				B2E288001B938E3600F220B9 /* ofxSliderGroup.cpp in Sources */,
+				B28881841BA1098C00B0CA87 /* ofxAssimpModelLoader.cpp in Sources */,
 				B2E287FE1B938E3600F220B9 /* ofxPanel.cpp in Sources */,
 				B2E287FA1B938E3600F220B9 /* ofxBaseGui.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				B2E287FF1B938E3600F220B9 /* ofxSlider.cpp in Sources */,
 				B2E287FB1B938E3600F220B9 /* ofxButton.cpp in Sources */,
-				B28881321B9EA1DE00B0CA87 /* model3DS.cpp in Sources */,
 				B2E287FD1B938E3600F220B9 /* ofxLabel.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				B2E287FC1B938E3600F220B9 /* ofxGuiGroup.cpp in Sources */,
+				B28881851BA1098C00B0CA87 /* ofxAssimpTexture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,9 +698,10 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
+					"/Users/yuta-toga/Programs/of/of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/libs/assimp/lib/osx",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxAssimpModelLoader/libs/assimp/include/;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -663,9 +785,10 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
+					"/Users/yuta-toga/Programs/of/of_v0.8.4_osx_release/addons/ofxAssimpModelLoader/libs/assimp/lib/osx",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = ../../../addons/ofxAssimpModelLoader/libs/assimp/include/;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

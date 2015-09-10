@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxDmx.h"
-#include "ofx3DModelLoader.h"
+#include "ofxAssimpModelLoader.h"
 
 class ofApp : public ofBaseApp{
     
@@ -43,5 +43,5 @@ public:
     ofxDmx dmx;
     
     // 3d model
-    ofx3DModelLoader sakuraModel;
+    ofxAssimpModelLoader sakuraModel;
 };
