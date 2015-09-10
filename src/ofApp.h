@@ -4,6 +4,7 @@
 #include "ofxGui.h"
 #include "ofxDmx.h"
 #include "ofxAssimpModelLoader.h"
+#include "ofxBullet.h"
 
 class ofApp : public ofBaseApp{
     
@@ -44,4 +45,15 @@ public:
     
     // 3d model
     ofxAssimpModelLoader sakuraModel;
+    
+    // camera
+    ofEasyCam camera;
+    
+    // physics
+    ofxBulletWorldRigid world;
+    ofxBulletBox ground;
+    vector<ofxBulletCustomShape*> sakuraBulletShapes;
+    
+    // light
+    ofLight light;
 };
