@@ -51,7 +51,7 @@ public:
     
     // physics
     ofxBulletWorldRigid world;
-    ofxBulletBox ground;
+    ofxBulletBox *ground;
     vector<ofxBulletCustomShape*> sakuraBulletShapes;
     
     // light
