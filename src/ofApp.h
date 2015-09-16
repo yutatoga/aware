@@ -50,8 +50,9 @@ public:
     ofEasyCam camera;
     
     // physics
-    ofxBulletWorldRigid world;
-    ofxBulletBox *ground;
+    ofxBulletWorldSoft world;
+    ofxBulletBox *groundBox;
+    ofxBulletPatch *groundPatch;
     vector<ofxBulletCustomShape*> sakuraBulletShapes;
     
     // light

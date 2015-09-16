@@ -48,11 +48,29 @@ void ofApp::setup(){
     world.setCamera(&camera);
     world.setGravity( ofVec3f(0, 25., 0) );
     
-    ground = new ofxBulletBox();
-    ground->create( world.world, ofVec3f(0., 5.5, 0.), 0., 50., 1.f, 50.f );
-    ground->setProperties(.25, .95);
-    ground->add();
+    // ground
+    groundBox = new ofxBulletBox();
+    groundBox->create( world.world, ofVec3f(0., 5.5, 0.), 0., 50., 1.f, 50.f );
+    groundBox->setProperties(.25, .95);
+    groundBox->add();
     
+    const btScalar	s = 8;
+    const btScalar	h = -7;
+    const int		r = 64;
+    
+    // patches
+    groundPatch = new ofxBulletPatch();
+    groundPatch->create( &world, ofVec3f(-s,h,-s), ofVec3f(s,h,-s), ofVec3f(-s, h, s ), ofVec3f(s,h,s), r, r );
+//    patch->getSoftBody()->getCollisionShape()->setMargin(0.25);
+//    patch->getSoftBody()->generateBendingConstraints(1, patch->getSoftBody()->m_materials[0]);
+//    patch->getSoftBody()->m_materials[0]->m_kLST		=	0.4;
+    groundPatch->add();
+//    patch->setMass( 0.25, false );
+//    patch->getSoftBody()->m_cfg.piterations = 20;
+//    patch->getSoftBody()->m_cfg.citerations = 20;
+//    patch->getSoftBody()->m_cfg.diterations = 20;
+        
+    // sakura
     ofQuaternion startRot = ofQuaternion(1., 0., 0., PI);
     sakuraBulletShapes.resize(10);
     for (int i = 0; i < sakuraBulletShapes.size(); i++) {
@@ -124,8 +142,9 @@ void ofApp::draw(){
                 light.enable();{
                     // ground
                     ofSetColor(34, 107, 126);
-                    ground->draw();
+                    groundBox->draw();
                     ofSetColor(255);
+                    groundPatch->draw();
                     
                     // draw sakura
                     ofxAssimpMeshHelper & meshHelper = sakuraModel.getMeshHelper(0);
