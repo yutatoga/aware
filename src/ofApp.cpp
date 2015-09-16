@@ -69,7 +69,12 @@ void ofApp::setup(){
 //    patch->getSoftBody()->m_cfg.piterations = 20;
 //    patch->getSoftBody()->m_cfg.citerations = 20;
 //    patch->getSoftBody()->m_cfg.diterations = 20;
-        
+    
+    // pole
+    poleCylinder = new ofxBulletCylinder();
+    poleCylinder->create(world.world, ofVec3f(0, -10, 0), 100, 0.3, 10);
+    poleCylinder->add();
+    
     // sakura
     ofQuaternion startRot = ofQuaternion(1., 0., 0., PI);
     sakuraBulletShapes.resize(10);
@@ -145,6 +150,11 @@ void ofApp::draw(){
                     groundBox->draw();
                     ofSetColor(255);
                     groundPatch->draw();
+                    
+                    // pole
+                    ofSetColor(ofColor::yellow);
+                    poleCylinder->draw();
+                    ofSetColor(255);
                     
                     // draw sakura
                     ofxAssimpMeshHelper & meshHelper = sakuraModel.getMeshHelper(0);
