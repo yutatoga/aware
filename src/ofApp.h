@@ -59,4 +59,7 @@ public:
     
     // light
     ofLight light;
+    
+    // debug
+    bool enableDebugDraw;
 };

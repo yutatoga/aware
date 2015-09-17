@@ -52,47 +52,29 @@ void ofApp::setup(){
     world.setCamera(&camera);
     world.setGravity( ofVec3f(0, 25., 0) );
     
-    // ground
-    groundBox = new ofxBulletBox();
-    groundBox->create( world.world, ofVec3f(0., 5.5, 0.), 0., 50., 1.f, 50.f );
-    groundBox->setProperties(.25, .95);
-    groundBox->add();
-    
-    const btScalar	s = 8;
-    const btScalar	h = -7;
-    const int		r = 64;
-    
-    // patches
-    groundPatch = new ofxBulletPatch();
-    groundPatch->create( &world, ofVec3f(-s,h,-s), ofVec3f(s,h,-s), ofVec3f(-s, h, s ), ofVec3f(s,h,s), r, r );
-//    patch->getSoftBody()->getCollisionShape()->setMargin(0.25);
-//    patch->getSoftBody()->generateBendingConstraints(1, patch->getSoftBody()->m_materials[0]);
-//    patch->getSoftBody()->m_materials[0]->m_kLST		=	0.4;
-    groundPatch->add();
-//    patch->setMass( 0.25, false );
-//    patch->getSoftBody()->m_cfg.piterations = 20;
-//    patch->getSoftBody()->m_cfg.citerations = 20;
-//    patch->getSoftBody()->m_cfg.diterations = 20;
-    
     // pole
+    float poleCylinderMass = 100;
+    float poleCylinderRadius = 0.3;
+    float poleCylinderHeight = 10;
+    
     for (int i = 0; i < 4; i++) {
         shared_ptr<ofxBulletCylinder> cylinder(new ofxBulletCylinder);
         switch (i) {
             case 0:
                 // - front left
-                cylinder->create(world.world, ofVec3f(-20, -10, 20), 100, 0.3, 10);
+                cylinder->create(world.world, ofVec3f(-20, -10, 20), poleCylinderMass, poleCylinderRadius, poleCylinderHeight);
                 break;
             case 1:
                 // - front right
-                cylinder->create(world.world, ofVec3f(20, -10, 20), 100, 0.3, 10);
+                cylinder->create(world.world, ofVec3f(20, -10, 20), poleCylinderMass, poleCylinderRadius, poleCylinderHeight);
                 break;
             case 2:
                 // - rear left
-                cylinder->create(world.world, ofVec3f(-20, -10, -20), 100, 0.3, 10);
+                cylinder->create(world.world, ofVec3f(-20, -10, -20), poleCylinderMass, poleCylinderRadius, poleCylinderHeight);
                 break;
             case 3:
                 // - rear right
-                cylinder->create(world.world, ofVec3f(20, -10, -20), 100, 0.3, 10);
+                cylinder->create(world.world, ofVec3f(20, -10, -20), poleCylinderMass, poleCylinderRadius, poleCylinderHeight);
                 break;
             default:
                 break;
@@ -100,6 +82,35 @@ void ofApp::setup(){
         cylinder->add();
         poleCylinders.push_back(cylinder);
     }
+    
+    // ground
+    groundBox = new ofxBulletBox();
+    groundBox->create( world.world, ofVec3f(0., 5.5, 0.), 0., 50., 1.f, 50.f );
+    groundBox->setProperties(.25, .95);
+    groundBox->add();
+    
+    const btScalar	s = 18;
+    const btScalar	h = -2*poleCylinderHeight;
+    const int		r = 64;
+    
+    // patches
+    groundPatch = new ofxBulletPatch();
+    groundPatch->create( &world, ofVec3f(-s,h,-s), ofVec3f(s,h,-s), ofVec3f(-s, h, s ), ofVec3f(s,h,s), r, r );
+    
+//    groundPatch->getSoftBody()->getCollisionShape()->setMargin(0.25);
+//    groundPatch->getSoftBody()->generateBendingConstraints(1, patch->getSoftBody()->m_materials[0]);
+//    groundPatch->getSoftBody()->m_materials[0]->m_kLST		=	0.4;
+    groundPatch->setMass(0.000001);
+    groundPatch->attachRigidBodyAt(r*(r-1), poleCylinders[0]->getRigidBody());
+    groundPatch->attachRigidBodyAt(r*r-1, poleCylinders[1]->getRigidBody());
+    groundPatch->attachRigidBodyAt(r*0, poleCylinders[2]->getRigidBody());
+    groundPatch->attachRigidBodyAt(r*1-1, poleCylinders[3]->getRigidBody());
+
+    groundPatch->add();
+//    patch->setMass( 0.25, false );
+//    patch->getSoftBody()->m_cfg.piterations = 20;
+//    patch->getSoftBody()->m_cfg.citerations = 20;
+//    patch->getSoftBody()->m_cfg.diterations = 20;
     
     // sakura
     ofQuaternion startRot = ofQuaternion(1., 0., 0., PI);
@@ -117,6 +128,10 @@ void ofApp::setup(){
         sakuraBulletShapes[i]->create(world.world, startLoc, startRot, 3.);
         sakuraBulletShapes[i]->add();
     }
+    
+    // debug
+    enableDebugDraw = false;
+    world.enableDebugDraw();
 }
 
 void ofApp::allChannelsOnButtonPressed(){
@@ -167,9 +182,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    world.drawDebug();
     // 3d model
     ofEnableDepthTest();{
         camera.begin();{
+            ofSetLineWidth(1.f);
+            if(enableDebugDraw) world.drawDebug();
+            
             ofEnableLighting();{
                 light.enable();{
                     // ground
@@ -220,6 +240,9 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     switch (key) {
+        case 'd':
+            enableDebugDraw = !enableDebugDraw;
+            break;
         case 'f':
             ofToggleFullscreen();
             break;
