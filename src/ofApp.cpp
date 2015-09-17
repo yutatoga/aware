@@ -53,7 +53,7 @@ void ofApp::setup(){
     world.setGravity( ofVec3f(0, 25., 0) );
     
     // pole
-    float poleCylinderMass = 100;
+    float poleCylinderMass = 0; // set as static
     float poleCylinderRadius = 0.3;
     float poleCylinderHeight = 10;
     
@@ -79,6 +79,7 @@ void ofApp::setup(){
             default:
                 break;
         }
+
         cylinder->add();
         poleCylinders.push_back(cylinder);
     }
@@ -96,21 +97,21 @@ void ofApp::setup(){
     // patches
     groundPatch = new ofxBulletPatch();
     groundPatch->create( &world, ofVec3f(-s,h,-s), ofVec3f(s,h,-s), ofVec3f(-s, h, s ), ofVec3f(s,h,s), r, r );
-    
+    groundPatch->add();
 //    groundPatch->getSoftBody()->getCollisionShape()->setMargin(0.25);
-//    groundPatch->getSoftBody()->generateBendingConstraints(1, patch->getSoftBody()->m_materials[0]);
+//    groundPatch->getSoftBody()->generateBendingConstraints(1, groundPatch->getSoftBody()->m_materials[0]);
 //    groundPatch->getSoftBody()->m_materials[0]->m_kLST		=	0.4;
-    groundPatch->setMass(0.000001);
+    
+    groundPatch->setMass(0.25, false);
+    groundPatch->getSoftBody()->m_cfg.piterations = 20;
+    groundPatch->getSoftBody()->m_cfg.citerations = 20;
+    groundPatch->getSoftBody()->m_cfg.diterations = 20;
+    
     groundPatch->attachRigidBodyAt(r*(r-1), poleCylinders[0]->getRigidBody());
     groundPatch->attachRigidBodyAt(r*r-1, poleCylinders[1]->getRigidBody());
     groundPatch->attachRigidBodyAt(r*0, poleCylinders[2]->getRigidBody());
     groundPatch->attachRigidBodyAt(r*1-1, poleCylinders[3]->getRigidBody());
 
-    groundPatch->add();
-//    patch->setMass( 0.25, false );
-//    patch->getSoftBody()->m_cfg.piterations = 20;
-//    patch->getSoftBody()->m_cfg.citerations = 20;
-//    patch->getSoftBody()->m_cfg.diterations = 20;
     
     // sakura
     ofQuaternion startRot = ofQuaternion(1., 0., 0., PI);
@@ -241,28 +242,34 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     switch (key) {
         case 'd':
+            // draw debug or disable to draw debug
             enableDebugDraw = !enableDebugDraw;
             break;
         case 'f':
+            // full screen or disable full screnn
             ofToggleFullscreen();
             break;
         case 'h':
+            // show or hide gui
             showGui = !showGui;
             break;
         case 'l':
+            // load gui setting data
             gui.loadFromFile("settings.xml");
             break;
         case 's':
+            // save gui setting
             gui.saveToFile("settings.xml");
             break;
         case ' ':{
+            // add one sphere
             shared_ptr< ofxBulletSphere > ss( new ofxBulletSphere() );
-            ss->create( world.world, camera.getPosition(), 0.02, .6 );
+            ss->create( world.world, camera.getPosition(), 0.000005, 1.0);
             ss->add();
             
             ofVec3f frc = -camera.getPosition();
             frc.normalize();
-            ss->applyCentralForce( frc * 50 );
+            ss->applyCentralForce( frc * 0.001 );
             
             spheres.push_back( ss );
         }
