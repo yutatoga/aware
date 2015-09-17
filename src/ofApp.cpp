@@ -35,7 +35,7 @@ void ofApp::setup(){
     
     // camera
     camera.setDistance(14);
-    camera.setPosition(ofVec3f(0, -3.f, -40.f));
+    camera.setPosition(ofVec3f(0, -30.f, -50.f));
     camera.lookAt(ofVec3f(0, 0, 0), ofVec3f(0, -1, 0));
     camera.enableMouseInput();
     
@@ -71,9 +71,31 @@ void ofApp::setup(){
 //    patch->getSoftBody()->m_cfg.diterations = 20;
     
     // pole
-    poleCylinder = new ofxBulletCylinder();
-    poleCylinder->create(world.world, ofVec3f(0, -10, 0), 100, 0.3, 10);
-    poleCylinder->add();
+    for (int i = 0; i < 4; i++) {
+        shared_ptr<ofxBulletCylinder> cylinder(new ofxBulletCylinder);
+        switch (i) {
+            case 0:
+                // - front left
+                cylinder->create(world.world, ofVec3f(-20, -10, 20), 100, 0.3, 10);
+                break;
+            case 1:
+                // - front right
+                cylinder->create(world.world, ofVec3f(20, -10, 20), 100, 0.3, 10);
+                break;
+            case 2:
+                // - rear left
+                cylinder->create(world.world, ofVec3f(-20, -10, -20), 100, 0.3, 10);
+                break;
+            case 3:
+                // - rear right
+                cylinder->create(world.world, ofVec3f(20, -10, -20), 100, 0.3, 10);
+                break;
+            default:
+                break;
+        }
+        cylinder->add();
+        poleCylinders.push_back(cylinder);
+    }
     
     // sakura
     ofQuaternion startRot = ofQuaternion(1., 0., 0., PI);
@@ -153,7 +175,9 @@ void ofApp::draw(){
                     
                     // pole
                     ofSetColor(ofColor::yellow);
-                    poleCylinder->draw();
+                    for (int i = 0; i < poleCylinders.size(); i++) {
+                        poleCylinders[i]->draw();
+                    }
                     ofSetColor(255);
                     
                     // draw sakura

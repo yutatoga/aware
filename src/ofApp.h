@@ -53,7 +53,7 @@ public:
     ofxBulletWorldSoft world;
     ofxBulletBox *groundBox;
     ofxBulletPatch *groundPatch;
-    ofxBulletCylinder *poleCylinder;
+    vector<shared_ptr<ofxBulletCylinder> > poleCylinders;
     vector<ofxBulletCustomShape*> sakuraBulletShapes;
     
     // light
