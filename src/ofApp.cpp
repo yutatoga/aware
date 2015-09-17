@@ -1,5 +1,9 @@
 #include "ofApp.h"
 
+bool shouldRemoveRigidBody( const shared_ptr<ofxBulletRigidBody>& ab ) {
+    return ab->getPosition().y > 15;
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
@@ -158,6 +162,7 @@ void ofApp::update(){
     
     // physics
     world.update();
+    ofRemove( spheres, shouldRemoveRigidBody );
 }
 
 //--------------------------------------------------------------
@@ -179,6 +184,12 @@ void ofApp::draw(){
                         poleCylinders[i]->draw();
                     }
                     ofSetColor(255);
+                    
+                    // spheres
+                    ofSetHexColor( 0xC4EF02 );
+                    for( int i = 0; i < spheres.size(); i++ ) {
+                        spheres[i]->draw();
+                    }
                     
                     // draw sakura
                     ofxAssimpMeshHelper & meshHelper = sakuraModel.getMeshHelper(0);
@@ -220,6 +231,18 @@ void ofApp::keyPressed(int key){
             break;
         case 's':
             gui.saveToFile("settings.xml");
+            break;
+        case ' ':{
+            shared_ptr< ofxBulletSphere > ss( new ofxBulletSphere() );
+            ss->create( world.world, camera.getPosition(), 0.02, .6 );
+            ss->add();
+            
+            ofVec3f frc = -camera.getPosition();
+            frc.normalize();
+            ss->applyCentralForce( frc * 50 );
+            
+            spheres.push_back( ss );
+        }
             break;
         default:
             break;

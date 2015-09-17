@@ -54,6 +54,7 @@ public:
     ofxBulletBox *groundBox;
     ofxBulletPatch *groundPatch;
     vector<shared_ptr<ofxBulletCylinder> > poleCylinders;
+    vector<shared_ptr<ofxBulletSphere> > spheres;
     vector<ofxBulletCustomShape*> sakuraBulletShapes;
     
     // light
