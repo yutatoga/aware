@@ -211,6 +211,7 @@ void ofApp::draw(){
                     for( int i = 0; i < spheres.size(); i++ ) {
                         spheres[i]->draw();
                     }
+                    ofSetColor(255);
                     
                     // draw sakura
                     ofxAssimpMeshHelper & meshHelper = sakuraModel.getMeshHelper(0);
@@ -256,6 +257,17 @@ void ofApp::keyPressed(int key){
         case 'l':
             // load gui setting data
             gui.loadFromFile("settings.xml");
+            break;
+        case 'm':{
+            // add sakura model
+            ofxBulletCustomShape *sakuraShape;
+            sakuraShape = new ofxBulletCustomShape;
+            ofQuaternion startRot = ofQuaternion(1., 0., 0., PI);
+            sakuraShape->init((btCompoundShape*)sakuraBulletShapes[0]->getCollisionShape(), sakuraBulletShapes[0]->getCentroid());
+            sakuraShape->create(world.world, camera.getPosition(), startRot, 0.000005);
+            sakuraShape->add();
+            sakuraBulletShapes.push_back(sakuraShape);
+        }
             break;
         case 's':
             // save gui setting
