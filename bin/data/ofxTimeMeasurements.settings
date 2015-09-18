@@ -1,0 +1,9 @@
+draw()=1|1
+pole=1|1
+update world=1|1
+update dmx=1|1
+update()=1|1
+update sakura=1|1
+ground=1|1
+sphere=1|1
+sakura=1|1

@@ -5,6 +5,7 @@
 #include "ofxDmx.h"
 #include "ofxAssimpModelLoader.h"
 #include "ofxBullet.h"
+#include "ofxTimeMeasurements.h"
 
 class ofApp : public ofBaseApp{
     

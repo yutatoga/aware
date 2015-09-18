@@ -9,6 +9,10 @@ void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofBackground(ofColor(34, 107, 126));
     
+    TIME_SAMPLE_SET_FRAMERATE(60.0f); //specify a target framerate
+    ofSetVerticalSync(false);
+    ofSetFrameRate(0);
+    
     // gui
     showGui = true;
     allChannelsOnButton.addListener(this, &ofApp::allChannelsOnButtonPressed);
@@ -129,7 +133,7 @@ void ofApp::setup(){
         sakuraBulletShapes[i]->create(world.world, startLoc, startRot, 3.);
         sakuraBulletShapes[i]->add();
     }
-    
+
     // debug
     enableDebugDraw = false;
     world.enableDebugDraw();
@@ -151,33 +155,40 @@ void ofApp::allChannelsOffButtonPressed(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    if (enableChannel1.get()) {
-        dmx.setLevel(1, channel1);
-    }else{
-        dmx.setLevel(1, 0);
-    }
-    if (enableChannel2.get()) {
-        dmx.setLevel(2, channel2);
-    }else{
-        dmx.setLevel(2, 0);
-    }
-    if (enableChannel3.get()) {
-        dmx.setLevel(3, channel3);
-    }else{
-        dmx.setLevel(3, 0);
-    }
-    if (enableChannel4.get()) {
-        dmx.setLevel(4, channel4);
-    }else{
-        dmx.setLevel(4, 0);
-    }
-    dmx.update();
+    // dmx
+    TS_START("update dmx");{
+        if (enableChannel1.get()) {
+            dmx.setLevel(1, channel1);
+        }else{
+            dmx.setLevel(1, 0);
+        }
+        if (enableChannel2.get()) {
+            dmx.setLevel(2, channel2);
+        }else{
+            dmx.setLevel(2, 0);
+        }
+        if (enableChannel3.get()) {
+            dmx.setLevel(3, channel3);
+        }else{
+            dmx.setLevel(3, 0);
+        }
+        if (enableChannel4.get()) {
+            dmx.setLevel(4, channel4);
+        }else{
+            dmx.setLevel(4, 0);
+        }
+        dmx.update();
+    }TS_STOP("update dmx");
     
     // 3d model
-    sakuraModel.update();
-    
+    TS_START("update sakura");{
+        sakuraModel.update();
+    }TS_STOP("update sakura");
     // physics
-    world.update();
+    TS_START("update world");{
+        world.update();
+    }TS_STOP("update world");
+    
     ofRemove( spheres, shouldRemoveRigidBody );
 }
 
@@ -194,39 +205,47 @@ void ofApp::draw(){
             ofEnableLighting();{
                 light.enable();{
                     // ground
-                    ofSetColor(34, 107, 126);
-                    groundBox->draw();
-                    ofSetColor(255);
-                    groundPatch->draw();
+                    TS_START("ground");{
+                        ofSetColor(34, 107, 126);
+                        groundBox->draw();
+                        ofSetColor(255);
+                        groundPatch->draw();
+                    }TS_STOP("ground");
                     
                     // pole
-                    ofSetColor(ofColor::yellow);
-                    for (int i = 0; i < poleCylinders.size(); i++) {
-                        poleCylinders[i]->draw();
-                    }
-                    ofSetColor(255);
+                    TS_START("pole");{
+                        ofSetColor(ofColor::yellow);
+                        for (int i = 0; i < poleCylinders.size(); i++) {
+                            poleCylinders[i]->draw();
+                        }
+                        ofSetColor(255);
+                    }TS_STOP("pole");
                     
                     // spheres
-                    ofSetHexColor( 0xC4EF02 );
-                    for( int i = 0; i < spheres.size(); i++ ) {
-                        spheres[i]->draw();
-                    }
-                    ofSetColor(255);
+                    TS_START("sphere");{
+                        ofSetHexColor( 0xC4EF02 );
+                        for( int i = 0; i < spheres.size(); i++ ) {
+                            spheres[i]->draw();
+                        }
+                        ofSetColor(255);
+                    }TS_STOP("sphere");
                     
                     // draw sakura
-                    ofxAssimpMeshHelper & meshHelper = sakuraModel.getMeshHelper(0);
-                    ofMaterial & material = meshHelper.material;
-                    ofPoint scale = sakuraModel.getScale();
-                    meshHelper.getTextureRef().bind();{
-                        material.begin();{
-                            for (int i = 0; i < sakuraBulletShapes.size(); i++) {
-                                sakuraBulletShapes[i]->transformGL();{
-                                    ofScale(scale.x, scale.y, scale.z);
-                                    sakuraModel.getCurrentAnimatedMesh(0).drawFaces();
-                                } sakuraBulletShapes[i]->restoreTransformGL();
-                            }
-                        }material.end();
-                    }meshHelper.getTextureRef().unbind();
+                    TS_START("sakura");{
+                        ofxAssimpMeshHelper & meshHelper = sakuraModel.getMeshHelper(0);
+                        ofMaterial & material = meshHelper.material;
+                        ofPoint scale = sakuraModel.getScale();
+                        meshHelper.getTextureRef().bind();{
+                            material.begin();{
+                                for (int i = 0; i < sakuraBulletShapes.size(); i++) {
+                                    sakuraBulletShapes[i]->transformGL();{
+                                        ofScale(scale.x, scale.y, scale.z);
+                                        sakuraModel.getCurrentAnimatedMesh(0).drawFaces();
+                                    } sakuraBulletShapes[i]->restoreTransformGL();
+                                }
+                            }material.end();
+                        }meshHelper.getTextureRef().unbind();
+                    }TS_STOP("sakura");
                 }light.disable();
             }ofDisableLighting();
         } camera.end();
